@@ -7,6 +7,11 @@ var usersValidate = require('../validate/users.validate');
 
 router.get('/', controller.index); 
 
+router.get('/cookie', function(req, res, next) {
+	res.cookie('user-id', 12345);
+	res.send('HELLO');
+});
+
 // Nhận thông tin query từ view và lọc tên theo ký tự tìm kiếm
 router.get('/search', controller.search);
 
