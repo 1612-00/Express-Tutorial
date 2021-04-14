@@ -1,3 +1,5 @@
+// Chi tiết các hàm được sử dụng trong module users 
+
 var db = require('../db.js');
 var shortid = require('shortid');
 

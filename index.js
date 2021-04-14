@@ -1,6 +1,9 @@
 var express = require('express');
-var userRouter = require('./routes/users.route.js');
 var cookieParser = require('cookie-parser');
+
+var userRouter = require('./routes/users.route.js');
+var authRouter = require('./routes/auth.route.js');
+var authMiddleware = require('./middlewares/auth.middleware')
 
 var port = 3000;
 
@@ -21,7 +24,10 @@ app.get('/', function(req, res) {
 	res.render('index', { name: 'BLABLA' });
 });
 
-app.use('/users', userRouter); 
+// Bắt buộc phải login mới cho sử dụng các chức năng trong users
+// <=> Phải vượt qua authMiddleware.requireAuth thì mới truy cập userRouter
+app.use('/users', authMiddleware.requireAuth, userRouter); 
+app.use('/auth', authRouter); 
 
 app.listen(port, function() {
 	console.log('Server listening on port ' + port);

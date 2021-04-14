@@ -1,0 +1,20 @@
+extends ../layouts/common
+block content
+	div(class="container")
+		h1 Login
+		//- Nếu có lỗi thì in lỗi ra 
+		if errors
+			each error in errors
+				.alert.alert-danger= error
+
+		form(method="POST", class="form-group")
+			.form-group
+				label(for="#email") Email
+				input(name="email", id="email", type="text", class="form-control ml-2 mr-2", value=values ? values.email : "")
+				//- gán giá trị đã nhập vào bằng thuộc tính value
+			.form-group
+				label(for="password") Password
+				input(name="password", id="password", type="password", class="form-control ml-2 mr-2", value=values ? values.password : "")
+
+			button(class="btn btn-info") Login
+			

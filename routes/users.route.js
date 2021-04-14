@@ -1,9 +1,12 @@
+// Khai báo các tên hàm sử dụng trong module users 
+
 var express = require('express');
 
 var router = express.Router();
 
 var controller = require('../controllers/users.controller.js');
 var usersValidate = require('../validate/users.validate');
+var authMiddleware = require('../middlewares/auth.middleware');
 
 router.get('/', controller.index); 
 
