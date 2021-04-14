@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 var controller = require('../controllers/users.controller.js');
+var usersValidate = require('../validate/users.validate');
 
 router.get('/', controller.index); 
 
@@ -14,6 +15,6 @@ router.get('/create', controller.create);
 
 router.get('/:id', controller.get);
 
-router.post('/create', controller.postCreate);
+router.post('/create', usersValidate.postCreate, controller.postCreate);
 
 module.exports = router;
