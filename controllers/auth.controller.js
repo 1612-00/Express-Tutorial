@@ -1,4 +1,5 @@
 // Chi tiết các hàm hiển thị form login và post dữ liệu login
+var md5 = require('md5');
 
 var db = require('../db.js');
 
@@ -27,8 +28,9 @@ module.exports.postLogin = function(req, res, next) {
 		return;
 	}
 
+	var hashedPassword = md5(password);
 	// Kiểm tra password nhập có trùng với password của email đó trong db không
-	if(user.password !== password) {
+	if(user.password !== hashedPassword) {
 		// Nếu không trùng thì đưa ra 1 thông báo error ở view, load lại trang login
 		res.render('auth/login', {
 			errors: [
@@ -40,6 +42,8 @@ module.exports.postLogin = function(req, res, next) {
 	}
 
 	// Trả về 1 cookie và load đến trang users 
-	res.cookie('userId', user.id);
+	res.cookie('userId', user.id, {
+		signed: true
+	});
 	res.redirect('/users');
 };

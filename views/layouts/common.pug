@@ -23,8 +23,10 @@ html
 						li(class="nav-item")
 							a(class="nav-link" href="/auth/login") 
 								h4
-									b Login
-						
+									b Login									
+				if user
+					h3= user.name
+	
 		block content
 		
 
